@@ -3,19 +3,32 @@ import TodoItem from './todo-item.vue'
 
 import { ref } from 'vue'
 
-interface TList {
+interface TTodo {
   title: string
   isCompleted: boolean
 }
 
-const todos = ref<TList[]>([])
+const saveTodos = () => {
+  localStorage.setItem('todos', JSON.stringify(todos.value))
+}
+
+const getTodoList = () => {
+  const todosRaw = localStorage.getItem('todos')
+  if (!todosRaw) return []
+  const todos: TTodo[] = JSON.parse(todosRaw)
+  return todos
+}
+
+const todos = ref<TTodo[]>(getTodoList())
 
 const toggleTodo = (index: number) => {
   todos.value[index].isCompleted = !todos.value[index].isCompleted
+  saveTodos()
 }
 
 const deleteTodo = (index: number) => {
   todos.value = todos.value.filter((__, todoIndex) => todoIndex !== index)
+  saveTodos()
 }
 
 const isInputOpen = ref<boolean>(false)
@@ -33,6 +46,7 @@ const addTodo = (e: Event) => {
   }
   inputValue.value = ''
   isInputOpen.value = false
+  saveTodos()
 }
 </script>
 
