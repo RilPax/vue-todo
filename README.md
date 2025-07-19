@@ -1,39 +1,57 @@
-# .
+# Todo — приложение для управления задачами
 
-This template should help get you started developing with Vue 3 in Vite.
+Простой и быстрый to-do список, созданный с использованием Vue 3 и TypeScript.
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Технологии
 
-## Type Support for `.vue` Imports in TS
+- [Vite](https://vitejs.dev/) — сборщик
+- [Vue 3](https://vuejs.org/) — фреймворк
+- [TypeScript](https://www.typescriptlang.org/) — типизация
+- [Prettier](https://prettier.io/) — форматирование кода
+- [ESLint](https://eslint.org/) — линтинг
+- [Lucide](https://lucide.dev/) — иконки SVG
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+---
 
-## Customize configuration
+## Как запустить проект
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
+# Установить зависимости
 npm install
-```
+# или
+yarn install
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Запустить в режиме разработки
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+# Собрать production-билд
 npm run build
+
+# Предпросмотр production-билда
+npm run preview
+
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Структура проекта
 
-```sh
-npm run lint
-```
+- src/components/todo-item.vue — компонент одной задачи
+
+- src/components/todo-list.vue — список всех задач
+
+- src/App.vue — корневой компонент приложения
+
+- src/main.ts — точка входа в приложение
+
+## Функциональность
+
+Пользователь может:
+
+- Добавлять задачи
+
+- Удалять задачи
+
+- Отмечать задачи как выполненные
+
+- Все изменения сохраняются в localStorage
