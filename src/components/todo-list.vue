@@ -15,7 +15,7 @@ const toggleTodo = (index: number) => {
 }
 
 const deleteTodo = (index: number) => {
-  todos.value = todos.value.filter((__, todoIndex) => todoIndex !== index )
+  todos.value = todos.value.filter((__, todoIndex) => todoIndex !== index)
 }
 
 const isInputOpen = ref<boolean>(false)
@@ -39,17 +39,85 @@ const addTodo = (e: Event) => {
 <template>
   <div class="todo-container">
     <h1 class="title">This is a ToDo</h1>
-    <ul class="todo-list">
+    <ul :class="['todo-list', { invisible: todos.length === 0 }]">
       <li v-for="(todo, index) in todos" v-bind:key="index" class="todo-item">
-        <TodoItem @toggle="toggleTodo(index)" @delete="deleteTodo(index)" :todo="todo" />
+        <TodoItem
+          @toggle="toggleTodo(index)"
+          @delete="deleteTodo(index)"
+          :todo="todo"
+        />
       </li>
     </ul>
-    <button v-if="!isInputOpen" type="button" @click="openInput">Add Todo</button>
-    <form v-else @submit="addTodo">
-      <input v-model="inputValue" type="text" name="todo" id="todo" placeholder="What todo?" />
-      <button type="submit">Add</button>
+    <button class="button" v-if="!isInputOpen" type="button" @click="openInput">
+      Add Todo
+    </button>
+    <form class="form" v-else @submit="addTodo">
+      <input
+        class="form-input"
+        v-model="inputValue"
+        type="text"
+        name="todo"
+        id="todo"
+        placeholder="What todo?"
+      />
+      <button class="button" type="submit">Add</button>
     </form>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.todo-container {
+  min-width: 250px;
+  padding: 30px;
+  border: 2px solid var(--color-border);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.title {
+  font-family: sans-serif;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 2px solid var(--color-border);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.invisible {
+  display: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.form-input {
+  background-color: var(--color-background);
+  outline: none;
+  border: none;
+}
+
+.button {
+  background-color: transparent;
+  border: 2px solid var(--color-border);
+  border-radius: 15px;
+  padding: 12px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--color-border);
+  color: var(--color-background);
+}
+</style>
